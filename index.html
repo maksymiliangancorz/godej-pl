@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>godej.pl – autorskie gry w przeglądarce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="kontener">
+
+    <header class="naglowek">
+      <a href="#wydarzenia" class="logo">GODEJ<span>.PL</span></a>
+      <span style="color:var(--przygaszony);font-size:14px"><span class="flaga"></span>Górny Śląsk</span>
+    </header>
+
+    <section class="hero">
+      <span class="powitanie">👋 Witej na godej.pl!</span>
+      <h1>Wpadnij na chwilę, <em>zostań na dłużej.</em></h1>
+      <p>Darmowe autorskie gry, które odpalisz w kilka sekund, wydarzenia z regionu i historia Górnego Śląska w jednym miejscu. Bez instalowania i bez zakładania konta.</p>
+      <div class="hero-przyciski">
+        <a href="#gry" class="przycisk skok">▶ Zagraj teraz</a>
+        <a href="#wydarzenia" class="przycisk drugi skok">Zobacz, co się dzieje</a>
+      </div>
+      <ul class="atuty">
+        <li>🎮 Gry tworzone od zera przez GaP-pa Studio</li>
+        <li>⚡ Działa na komputerze i telefonie</li>
+        <li>🏆 Punkty i seria dni nauki zapisują się same</li>
+      </ul>
+    </section>
+
+    <!-- ZAKŁADKI: link #nazwa otwiera panel o id="nazwa" -->
+    <nav class="zakladki">
+      <a href="#wydarzenia" data-panel="wydarzenia">Wydarzenia</a>
+      <a href="#gry" data-panel="gry">Gry</a>
+      <a href="#historia" data-panel="historia">Historia</a>
+    </nav>
+
+    <!-- ===== PANEL: WYDARZENIA ===== -->
+    <section id="wydarzenia" class="panel">
+      <h2>Wydarzenia kulturalne</h2>
+      <p class="wstep">Nadchodzące wydarzenia z oficjalnych stron instytucji kultury. Lista aktualizuje się sama raz na dobę.</p>
+
+      <!-- Tę listę wypełnia bot (plik wydarzenia.json) -->
+      <div class="wydarzenia" id="listaWydarzen">
+        <p class="pusto">Wczytuję wydarzenia…</p>
+      </div>
+      <button class="przycisk drugi ukryty" id="wiecejWydarzen" style="margin-top:14px">Pokaż więcej</button>
+      <p class="aktualizacja" id="aktualizacja"></p>
+
+      <h3 class="podtytul">Nowości ze strony</h3>
+      <!-- Własne wpisy: żeby dodać nowy, skopiuj jeden blok <div class="wydarzenie"> -->
+      <div class="wydarzenia">
+        <div class="wydarzenie">
+          <div class="data"><b>21</b><span>lis</span></div>
+          <div>
+            <h3>Start strony godej.pl</h3>
+            <p>Strona rusza z kursem „Nauka godki”: pierwsze lekcje śląskiego już czekają.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PANEL: GRY ===== -->
+    <section id="gry" class="panel">
+      <h2>Gry</h2>
+      <p class="wstep">Wybierz grę i zagraj. Nowe tytuły będą pojawiać się tutaj.</p>
+
+      <!-- Żeby dodać nową grę, skopiuj jeden <a class="kafelek"> i zmień link, nazwę i opis -->
+      <div class="siatka">
+        <a class="kafelek" href="gry/nauka/index.html">
+          <svg class="miniatura" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="150" fill="#0a2f70"/>
+            <rect x="70" y="30" width="160" height="56" rx="12" fill="#ffd200"/>
+            <polygon points="110,86 130,86 112,104" fill="#ffd200"/>
+            <text x="150" y="66" font-size="20" text-anchor="middle" fill="#0a3d91" font-family="monospace" font-weight="bold">GODEJ!</text>
+            <rect x="80" y="112" width="40" height="14" rx="7" fill="#164a9e"/>
+            <rect x="130" y="112" width="40" height="14" rx="7" fill="#4cd68a"/>
+            <rect x="180" y="112" width="40" height="14" rx="7" fill="#164a9e"/>
+          </svg>
+          <div class="opis">
+            <h3>Nauka</h3>
+            <p>Kurs śląskiej godki: krótkie lekcje po 5–7 minut, ćwiczenia, powtórki i seria dni nauki.</p>
+            <span class="etykieta">Edukacyjna</span>
+          </div>
+        </a>
+
+        <div class="kafelek wkrotce">
+          <svg class="miniatura" viewBox="0 0 300 150"><rect width="300" height="150" fill="#0a2a66"/>
+            <text x="150" y="85" font-size="22" text-anchor="middle" fill="#4f74b8" font-family="monospace">WKRÓTCE…</text></svg>
+          <div class="opis">
+            <h3>Twoja następna gra</h3>
+            <p>Tu pojawi się kolejny projekt.</p>
+            <span class="etykieta">W budowie</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PANEL: HISTORIA ===== -->
+    <section id="historia" class="panel">
+      <h2>Historia Górnego Śląska</h2>
+      <p class="wstep">Krótka oś czasu regionu, z którego pochodzą te gry. Możesz ją rozbudować albo zastąpić historią swojego projektu.</p>
+
+      <div class="os">
+        <div class="punkt">
+          <div class="rok">X wiek</div>
+          <h3>Pod władzą Piastów</h3>
+          <p>Ziemie zamieszkane przez plemiona Opolan i Gołęszyców zostają włączone do państwa pierwszych Piastów.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">XII–XIII wiek</div>
+          <h3>Własne księstwa</h3>
+          <p>Po rozbiciu dzielnicowym powstaje księstwo opolsko-raciborskie, od którego zaczyna się odrębna historia Górnego Śląska.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">XIV wiek</div>
+          <h3>Pod koroną czeską</h3>
+          <p>Książęta śląscy przyjmują zwierzchnictwo królów Czech, a Kazimierz Wielki potwierdza to w traktacie w Trenczynie (1335).</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">1526</div>
+          <h3>Czasy Habsburgów</h3>
+          <p>Wraz z koroną czeską Śląsk przechodzi pod panowanie Habsburgów.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">1742</div>
+          <h3>W granicach Prus</h3>
+          <p>Po wojnach śląskich większość regionu trafia do Prus. Śląsk Cieszyński i Opawski zostają przy Austrii.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">XIX wiek</div>
+          <h3>Węgiel i stal</h3>
+          <p>Rozwój kopalń, hut i kolei zmienia Górny Śląsk w jeden z największych okręgów przemysłowych Europy.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">1919–1922</div>
+          <h3>Powstania i plebiscyt</h3>
+          <p>Trzy powstania śląskie i plebiscyt z 1921 roku kończą się podziałem regionu. Część wschodnia trafia do Polski jako autonomiczne województwo śląskie z własnym Sejmem Śląskim.</p>
+        </div>
+        <div class="punkt">
+          <div class="rok">1945</div>
+          <h3>W granicach Polski</h3>
+          <p>Po II wojnie światowej niemal cały Górny Śląsk znajduje się w granicach Polski.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="stopka">
+      <div class="studio">Tworzone przez <b>GaP-pa Studio</b></div>
+      <span class="flaga"></span>© 2026 GaP-pa Studio · Wszystkie gry są autorskie
+    </footer>
+  </div>
+
+<script>
+// Przełączanie zakładek na podstawie adresu (#wydarzenia, #gry, #historia)
+const PANELE = ['wydarzenia', 'gry', 'historia'];
+function pokazZakladke() {
+  const nazwa = PANELE.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'wydarzenia';
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('aktywny', p.id === nazwa));
+  document.querySelectorAll('.zakladki a').forEach(a => a.classList.toggle('aktywna', a.dataset.panel === nazwa));
+}
+// zapobiega przewijaniu strony w dół przy kliknięciu zakładki
+document.querySelectorAll('.zakladki a, .logo, .skok').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  try { history.replaceState(null, '', a.getAttribute('href')); }
+  catch (err) { location.hash = a.getAttribute('href'); }
+  pokazZakladke();
+  // przyciski z nagłówka przewijają do zakładek
+  if (a.classList.contains('skok')) document.querySelector('.zakladki').scrollIntoView({ behavior: 'smooth' });
+}));
+window.addEventListener('hashchange', pokazZakladke);
+pokazZakladke();
+// ===== Wydarzenia zbierane przez bota (plik wydarzenia.json) =====
+const MIES_SKROT = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+const DNI = ['niedz.','pon.','wt.','śr.','czw.','pt.','sob.'];
+const escH = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const NA_START = 8;
+
+async function wczytajWydarzenia() {
+  const lista = document.getElementById('listaWydarzen');
+  const wiecej = document.getElementById('wiecejWydarzen');
+  let dane;
+  try {
+    const odp = await fetch('wydarzenia.json', { cache: 'no-store' });
+    if (!odp.ok) throw new Error();
+    dane = await odp.json();
+  } catch (e) {
+    lista.innerHTML = '<p class="pusto">Wydarzenia z instytucji kultury pojawią się tu po opublikowaniu strony i pierwszym uruchomieniu bota.</p>';
+    return;
+  }
+  const dzis = new Date().toLocaleDateString('sv-SE');
+  const wyd = (dane.wydarzenia || []).filter(e => e.data >= dzis);
+  if (!wyd.length) {
+    lista.innerHTML = '<p class="pusto">Na razie brak nadchodzących wydarzeń. Zajrzyj jutro – lista odświeża się codziennie.</p>';
+  } else {
+    lista.innerHTML = wyd.map((e, i) => {
+      const [r, m, d] = e.data.split('-').map(Number);
+      const dzien = DNI[new Date(r, m - 1, d).getDay()];
+      const gdzie = [e.miejsce, e.miasto].filter(Boolean).filter((v, j, t) => t.indexOf(v) === j).join(', ');
+      const link = /^https?:\/\//.test(e.link) ? `<a class="szczegoly" href="${escH(e.link)}" target="_blank" rel="noopener noreferrer">Szczegóły na stronie organizatora →</a>` : '';
+      return `<div class="wydarzenie ${i >= NA_START ? 'ukryty dodatkowe' : ''}">
+        <div class="data"><b>${d}</b><span>${MIES_SKROT[m - 1]}</span></div>
+        <div>
+          <h3>${escH(e.tytul)}</h3>
+          <p>${dzien}${e.godzina ? ' · ' + escH(e.godzina) : ''}${gdzie ? ' · 📍 ' + escH(gdzie) : ''}</p>
+          <p class="zrodlo-wyd">Źródło: ${escH(e.zrodlo)} ${link}</p>
+        </div></div>`;
+    }).join('');
+    if (wyd.length > NA_START) {
+      wiecej.classList.remove('ukryty');
+      wiecej.textContent = `Pokaż więcej (${wyd.length - NA_START})`;
+      wiecej.onclick = () => { lista.querySelectorAll('.dodatkowe').forEach(x => x.classList.remove('ukryty')); wiecej.classList.add('ukryty'); };
+    }
+  }
+  if (dane.zaktualizowano) {
+    const t = new Date(dane.zaktualizowano);
+    document.getElementById('aktualizacja').textContent = 'Ostatnia aktualizacja: ' + t.toLocaleString('pl-PL', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+  }
+}
+wczytajWydarzenia();
+</script>
+</body>
+</html>

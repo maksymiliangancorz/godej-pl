@@ -1,0 +1,163 @@
+/* ===== Wspólny wygląd całej strony ===== */
+:root {
+  /* Barwy Górnego Śląska: żółty i niebieski */
+  --zolty: #ffd200;
+  --niebieski: #0a3d91;
+  --tlo: #082a66;
+  --karta: #0f3a82;
+  --karta-hover: #164a9e;
+  --tekst: #f4f7ff;
+  --przygaszony: #b9c8e8;
+  --akcent: #ffd200;
+  --akcent2: #ffe873;
+  --linia: #2a5bab;
+  --promien: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--tekst);
+  /* żółty pas u góry jak na fladze, niżej niebieskie tło */
+  background:
+    linear-gradient(to bottom, var(--zolty) 0, var(--zolty) 10px, transparent 10px),
+    radial-gradient(ellipse at top, #1556b8 0%, var(--tlo) 60%) fixed,
+    var(--tlo);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.kontener { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
+
+/* Nagłówek */
+.naglowek {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--linia);
+}
+.logo { font-family: "Press Start 2P", monospace; font-size: 18px; color: var(--akcent); }
+.logo span { color: var(--akcent2); }
+.naglowek nav a { color: var(--przygaszony); margin-left: 18px; font-size: 15px; }
+.naglowek nav a:hover { color: var(--tekst); }
+
+/* Sekcja powitalna */
+.hero { padding: 56px 0 40px; }
+.hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.15; max-width: 640px; }
+.hero h1 em { font-style: normal; color: var(--akcent); }
+.hero p { color: var(--przygaszony); margin-top: 14px; max-width: 520px; font-size: 17px; }
+
+/* Siatka gier */
+.siatka {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.kafelek {
+  background: var(--karta); border-radius: var(--promien); overflow: hidden;
+  border: 1px solid var(--linia); transition: transform .15s, background .15s;
+  display: flex; flex-direction: column;
+}
+.kafelek:hover { transform: translateY(-4px); background: var(--karta-hover); }
+.miniatura { height: 150px; display: block; }
+.opis { padding: 16px 18px 20px; }
+.opis h3 { font-size: 20px; }
+.opis p { color: var(--przygaszony); font-size: 14px; margin: 6px 0 14px; }
+.etykieta {
+  display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: 99px;
+  background: rgba(255,210,0,.15); color: var(--zolty);
+}
+.kafelek.wkrotce { opacity: .55; pointer-events: none; }
+
+.stopka { margin-top: 60px; color: var(--przygaszony); font-size: 13px; text-align: center; }
+
+/* ===== Elementy wspólne dla stron gier ===== */
+.gra-gora {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; margin: 24px 0 16px;
+}
+.gra-gora h1 { font-size: 28px; }
+.wyniki { display: flex; gap: 10px; }
+.licznik {
+  background: var(--karta); padding: 6px 14px; border-radius: 10px;
+  font-size: 14px; color: var(--przygaszony);
+}
+.licznik b { color: var(--tekst); font-size: 17px; margin-left: 4px; }
+
+.przycisk {
+  background: var(--akcent); color: #1b1630; border: none; font: inherit;
+  font-weight: 700; padding: 10px 20px; border-radius: 10px; cursor: pointer;
+}
+.przycisk:hover { filter: brightness(1.08); }
+.przycisk.drugi { background: var(--karta); color: var(--tekst); box-shadow: inset 0 0 0 1px var(--linia); }
+
+.wskazowka { color: var(--przygaszony); font-size: 14px; margin-top: 14px; }
+
+.powrot { color: var(--przygaszony); font-size: 15px; }
+.powrot:hover { color: var(--tekst); }
+
+/* ===== Zakładki ===== */
+.zakladki { display: flex; gap: 6px; margin: 28px 0 0; border-bottom: 2px solid var(--linia); flex-wrap: wrap; }
+.zakladki a {
+  padding: 10px 20px; border-radius: 10px 10px 0 0; color: var(--przygaszony);
+  font-weight: 700; margin-bottom: -2px; border-bottom: 3px solid transparent;
+}
+.zakladki a:hover { color: var(--tekst); background: rgba(255,255,255,.05); }
+.zakladki a.aktywna { color: var(--zolty); border-bottom-color: var(--zolty); background: rgba(255,210,0,.08); }
+.panel { display: none; padding-top: 32px; }
+.panel.aktywny { display: block; }
+.panel > h2 { font-size: 28px; margin-bottom: 6px; }
+.panel > .wstep { color: var(--przygaszony); margin-bottom: 26px; max-width: 620px; }
+
+/* Oś czasu w Historii */
+.os { border-left: 3px solid var(--zolty); margin-left: 8px; }
+.punkt { position: relative; padding: 0 0 26px 26px; max-width: 680px; }
+.punkt::before {
+  content: ""; position: absolute; left: -9px; top: 4px; width: 15px; height: 15px;
+  border-radius: 50%; background: var(--niebieski); border: 3px solid var(--zolty);
+}
+.punkt .rok { color: var(--zolty); font-weight: 700; font-size: 14px; letter-spacing: .5px; }
+.punkt h3 { font-size: 18px; margin: 2px 0 4px; }
+.punkt p { color: var(--przygaszony); font-size: 15px; }
+
+/* Lista wydarzeń */
+.wydarzenia { display: grid; gap: 14px; }
+.wydarzenie {
+  display: flex; gap: 18px; align-items: flex-start; background: var(--karta);
+  border: 1px solid var(--linia); border-radius: var(--promien); padding: 16px 18px;
+}
+.data {
+  flex: 0 0 64px; text-align: center; background: var(--zolty); color: var(--niebieski);
+  border-radius: 10px; padding: 6px 0; font-weight: 700; line-height: 1.1;
+}
+.data b { display: block; font-size: 24px; }
+.data span { font-size: 12px; text-transform: uppercase; }
+.wydarzenie h3 { font-size: 18px; }
+.wydarzenie p { color: var(--przygaszony); font-size: 14px; margin-top: 2px; }
+
+.flaga { display: inline-block; width: 22px; height: 14px; vertical-align: -2px; margin-right: 6px;
+  background: linear-gradient(var(--zolty) 50%, var(--niebieski) 50%); border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,.3); }
+
+/* Stopka studia */
+.stopka { border-top: 1px solid var(--linia); padding-top: 12px; margin-top: 36px; font-size: 11px; }
+.stopka .flaga { width: 14px; height: 9px; vertical-align: 0; margin-right: 4px; }
+.studio { font-size: 12px; color: var(--przygaszony); margin-bottom: 2px; }
+.studio b { color: var(--zolty); font-family: "Press Start 2P", monospace; font-size: 9px; margin-left: 3px; }
+
+/* Nagłówek powitalny */
+.powitanie {
+  display: inline-block; background: rgba(255,210,0,.15); color: var(--zolty);
+  padding: 5px 14px; border-radius: 99px; font-size: 14px; font-weight: 700; margin-bottom: 16px;
+}
+.hero-przyciski { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.hero-przyciski .przycisk { padding: 13px 24px; font-size: 16px; }
+.atuty { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 24px; color: var(--przygaszony); font-size: 14px; }
+
+/* Wydarzenia z bota */
+.pusto { color: var(--przygaszony); background: var(--karta); border: 1px dashed var(--linia); border-radius: var(--promien); padding: 18px; }
+.zrodlo-wyd { font-size: 12px !important; margin-top: 6px !important; }
+.szczegoly { color: var(--zolty); margin-left: 6px; white-space: nowrap; }
+.szczegoly:hover { text-decoration: underline; }
+.aktualizacja { color: var(--przygaszony); font-size: 12px; margin-top: 10px; }
+.podtytul { font-size: 20px; margin: 34px 0 14px; }
+.ukryty { display: none !important; }

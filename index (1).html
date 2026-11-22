@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nauka godki – godej.pl</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .panel-nauki { background: var(--karta); border: 1px solid var(--linia); border-radius: var(--promien); padding: 24px 22px; }
+    .statystyki { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+    .stat { background: var(--karta); border: 1px solid var(--linia); border-radius: 12px; padding: 12px; text-align: center; }
+    .stat b { display: block; font-size: 22px; color: var(--zolty); }
+    .stat span { font-size: 13px; color: var(--przygaszony); }
+    .powtorki { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+    .lista-lekcji { display: grid; gap: 10px; }
+    .lekcja {
+      display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; font: inherit; color: var(--tekst);
+      background: var(--karta); border: 1px solid var(--linia); border-radius: 14px; padding: 14px 16px; cursor: pointer;
+    }
+    .lekcja:hover:not(:disabled) { border-color: var(--zolty); }
+    .lekcja:disabled { opacity: .5; cursor: default; }
+    .lekcja .numer { flex: 0 0 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: var(--tlo); border: 2px solid var(--linia); font-weight: 700; }
+    .lekcja.ukonczona .numer { background: var(--zolty); color: var(--niebieski); border-color: var(--zolty); }
+    .lekcja .tresc { flex: 1; }
+    .lekcja .tresc small { color: var(--przygaszony); display: block; font-size: 13px; }
+    .lekcja .stan { font-size: 13px; color: var(--przygaszony); white-space: nowrap; }
+
+    .etapy { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+    .etap { font-size: 12px; padding: 4px 10px; border-radius: 99px; background: var(--tlo); color: var(--przygaszony); }
+    .etap.teraz { background: var(--zolty); color: var(--niebieski); font-weight: 700; }
+    .etap.zrobiony { color: var(--zolty); }
+    .pasek { height: 6px; background: var(--linia); border-radius: 99px; overflow: hidden; margin-bottom: 18px; }
+    .pasek div { height: 100%; background: var(--zolty); transition: width .3s; }
+
+    .karta-slowa { text-align: center; padding: 10px 0; }
+    .obraz { font-size: 64px; line-height: 1.2; }
+    .sl { font-family: "Press Start 2P", monospace; font-size: clamp(18px, 5.5vw, 26px); color: var(--zolty); margin: 14px 0 8px; line-height: 1.4; }
+    .pl { font-size: 18px; }
+    .gwara { color: var(--przygaszony); font-size: 14px; margin-top: 6px; }
+    .glosnik { margin-top: 14px; }
+    .nawigacja { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+
+    .dymek { background: var(--tlo); border: 1px solid var(--linia); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; max-width: 88%; }
+    .dymek.prawy { margin-left: auto; border-color: rgba(255,210,0,.4); }
+    .dymek .kto { font-size: 12px; color: var(--zolty); font-weight: 700; }
+    .dymek .tlum { color: var(--przygaszony); font-size: 14px; margin-top: 4px; display: none; }
+    .dymek.otwarty .tlum { display: block; }
+
+    .typ { font-size: 13px; color: var(--zolty); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+    .polecenie { font-size: 18px; margin: 6px 0 16px; }
+    .opcje { display: grid; gap: 10px; }
+    .opcja { text-align: left; font: inherit; font-size: 16px; color: var(--tekst); cursor: pointer;
+      background: var(--tlo); border: 2px solid var(--linia); border-radius: 12px; padding: 12px 15px; }
+    .opcja:hover:not(:disabled) { border-color: var(--zolty); }
+    .opcja:disabled { cursor: default; }
+    .dobra { border-color: #4cd68a !important; background: rgba(76,214,138,.15) !important; }
+    .zla { border-color: #ff5d73 !important; background: rgba(255,93,115,.15) !important; }
+    .wybrana { border-color: var(--zolty) !important; }
+    .pary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pary .kol { display: grid; gap: 10px; align-content: start; }
+    .fiszka { background: var(--tlo); border: 2px dashed var(--linia); border-radius: 14px; padding: 26px 16px; text-align: center; }
+    .zdanie-odp { min-height: 54px; border-bottom: 2px solid var(--linia); display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0; margin-bottom: 14px; }
+    .klocki { display: flex; flex-wrap: wrap; gap: 8px; }
+    .klocek { font: inherit; color: var(--tekst); background: var(--tlo); border: 2px solid var(--linia); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+    .klocek:hover { border-color: var(--zolty); }
+    .info { margin-top: 14px; min-height: 22px; color: var(--przygaszony); }
+    .info.ok { color: #4cd68a; } .info.blad { color: #ff8a9a; }
+    .ciekawostka { font-size: 18px; line-height: 1.6; padding: 10px 0; }
+    .duzy { font-family: "Press Start 2P", monospace; font-size: 28px; color: var(--zolty); margin: 14px 0; text-align: center; }
+    .srodek { text-align: center; }
+    .ukryty { display: none !important; }
+    .pokoj-glowa { display: flex; align-items: center; gap: 12px; margin: 10px 0 4px; font-size: 20px; }
+    .opis-pokoju { line-height: 1.9; }
+    .luka { display: inline-block; min-width: 80px; text-align: center; padding: 0 10px; margin: 0 4px;
+      border-bottom: 3px solid var(--zolty); color: var(--zolty); font-weight: 700; border-radius: 6px; }
+    .uwaga-robocza { font-size: 13px; color: var(--przygaszony); margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <div class="kontener" style="max-width:600px">
+    <a href="../../index.html#gry" class="powrot">← Wszystkie gry</a>
+    <div class="gra-gora">
+      <h1>Nauka godki</h1>
+    </div>
+    <main id="ekran"></main>
+    <p class="uwaga-robocza">Śląskie słowa i zapis w lekcjach są robocze i czekają na sprawdzenie przez native speakerów.</p>
+  </div>
+
+  <div class="kontener" style="max-width:600px;padding-top:0">
+    <footer class="stopka">
+      <div class="studio">Tworzone przez <b>GaP-pa Studio</b></div>
+      <span class="flaga"></span>© 2026 GaP-pa Studio · Wszystkie gry są autorskie
+    </footer>
+  </div>
+
+<script>
+// Każdy plik w folderze lekcje/ wywołuje DODAJ_LEKCJE({...})
+const LEKCJE = [];
+function DODAJ_LEKCJE(l) { LEKCJE.push(l); }
+</script>
+
+<!-- ===== LEKCJE: jeden plik = jedna lekcja. Nową lekcję dopisz tutaj. ===== -->
+<script src="lekcje/lekcja-01.js"></script>
+<script src="lekcje/lekcja-02.js"></script>
+<script src="lekcje/lekcja-03.js"></script>
+<script src="lekcje/lekcja-04.js"></script>
+<script src="lekcje/lekcja-05.js"></script>
+<script src="lekcje/lekcja-06.js"></script>
+<script src="lekcje/lekcja-07.js"></script>
+<script src="lekcje/lekcja-08.js"></script>
+<script src="lekcje/lekcja-09.js"></script>
+<script src="lekcje/lekcja-10.js"></script>
+
+<script>
+// =====================================================================
+//  USTAWIENIA
+// =====================================================================
+const PUNKTY_ZA_ODPOWIEDZ = 10;
+// Powtórki rozłożone w czasie: po ilu dniach wraca słowo z danego „pudełka”
+const INTERWALY = [0, 1, 2, 4, 7, 14, 30];
+const SLOW_W_POWTORCE = 10;
+const ILE_POKOI = 4;   // ile zadań „pokoje” losować w lekcji
+
+// =====================================================================
+//  ZAPIS POSTĘPÓW (w przeglądarce gracza)
+// =====================================================================
+const KLUCZ = 'godka-postep';
+let postep = { punkty: 0, seria: 0, ostatniDzien: null, ukonczone: {}, slowa: {} };
+try { Object.assign(postep, JSON.parse(localStorage.getItem(KLUCZ)) || {}); } catch (e) {}
+function zapisz() { try { localStorage.setItem(KLUCZ, JSON.stringify(postep)); } catch (e) {} }
+
+function dzisiaj() { const d = new Date(); return Math.floor((d - d.getTimezoneOffset() * 60000) / 86400000); }
+
+function zaliczDzienNauki() {
+  const d = dzisiaj();
+  if (postep.ostatniDzien === d) return;
+  postep.seria = postep.ostatniDzien === d - 1 ? postep.seria + 1 : 1;
+  postep.ostatniDzien = d;
+}
+function aktualnaSeria() {
+  return postep.ostatniDzien !== null && postep.ostatniDzien >= dzisiaj() - 1 ? postep.seria : 0;
+}
+
+// Słowo dobrze zapamiętane idzie do wyższego pudełka (rzadziej wraca), źle — wraca do pierwszego
+function ocenSlowo(klucz, dobrze) {
+  const s = postep.slowa[klucz] || { pudelko: 0 };
+  s.pudelko = dobrze ? Math.min(s.pudelko + 1, INTERWALY.length - 1) : 1;
+  s.termin = dzisiaj() + INTERWALY[s.pudelko];
+  postep.slowa[klucz] = s;
+}
+function doPowtorki() {
+  const d = dzisiaj();
+  return Object.keys(postep.slowa).filter(k => postep.slowa[k].termin <= d && slowoPoKluczu(k));
+}
+
+// =====================================================================
+//  POMOCNICZE
+// =====================================================================
+const ekran = document.getElementById('ekran');
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const tasuj = t => { t = [...t]; for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; };
+const kluczSlowa = (lekcja, slowo) => lekcja.nr + ':' + slowo.sl;
+function slowoPoKluczu(k) {
+  const [nr, sl] = [k.slice(0, k.indexOf(':')), k.slice(k.indexOf(':') + 1)];
+  const l = LEKCJE.find(x => String(x.nr) === nr);
+  const s = l && (l.slowa || []).find(w => w.sl === sl);
+  return s ? { lekcja: l, slowo: s } : null;
+}
+function wszystkieSlowa() { return LEKCJE.filter(l => l.gotowa).flatMap(l => l.slowa); }
+function graj(sciezka) { if (sciezka) { try { new Audio(sciezka).play().catch(() => {}); } catch (e) {} } }
+function przyciskGlosnika(sciezka) {
+  return sciezka
+    ? `<button class="przycisk drugi glosnik" data-audio="${esc(sciezka)}">🔊 Posłuchaj</button>`
+    : `<button class="przycisk drugi glosnik" disabled style="opacity:.5">🔇 Nagranie wkrótce</button>`;
+}
+ekran.addEventListener('click', e => { const b = e.target.closest('[data-audio]'); if (b) graj(b.dataset.audio); });
+
+// =====================================================================
+//  EKRAN GŁÓWNY: lista lekcji
+// =====================================================================
+function menu() {
+  LEKCJE.sort((a, b) => a.nr - b.nr);
+  const powt = doPowtorki().length;
+  ekran.innerHTML = `
+    <div class="statystyki">
+      <div class="stat"><b>🔥 ${aktualnaSeria()}</b><span>dni z rzędu</span></div>
+      <div class="stat"><b>⭐ ${postep.punkty}</b><span>punktów</span></div>
+      <div class="stat"><b>📚 ${Object.keys(postep.slowa).length}</b><span>poznanych słów</span></div>
+    </div>
+    <div class="panel-nauki powtorki">
+      <div><b>Powtórki na dziś: ${powt}</b><br><small style="color:var(--przygaszony)">Słowa wracają tuż przed tym, jak je zapomnisz.</small></div>
+      <button class="przycisk" id="btnPowt" ${powt ? '' : 'disabled style="opacity:.5"'}>🔁 Powtórz</button>
+    </div>
+    <div class="lista-lekcji">
+      ${LEKCJE.map(l => {
+        const wynik = postep.ukonczone[l.nr];
+        const stan = !l.gotowa ? 'W przygotowaniu' : wynik ? `✓ ${wynik.najlepszy}%` : 'Zacznij →';
+        return `<button class="lekcja ${wynik ? 'ukonczona' : ''}" data-nr="${l.nr}" ${l.gotowa ? '' : 'disabled'}>
+          <span class="numer">${l.nr}</span>
+          <span class="tresc">${esc(l.tytul)}<small>${esc(l.tytulSl || '')}${l.gotowa ? ` · ${l.slowa.length} słów · ok. 5–7 min` : ''}</small></span>
+          <span class="stan">${stan}</span></button>`;
+      }).join('')}
+    </div>`;
+  ekran.querySelectorAll('.lekcja').forEach(b => b.addEventListener('click', () => startLekcji(LEKCJE.find(l => l.nr == b.dataset.nr))));
+  document.getElementById('btnPowt').addEventListener('click', startPowtorki);
+}
+
+// =====================================================================
+//  LEKCJA: słowa → dialog → ćwiczenia → ciekawostka → podsumowanie
+// =====================================================================
+const ETAPY = ['Słowa', 'Dialog', 'Ćwiczenia', 'Ciekawostka', 'Podsumowanie'];
+let L, stan;
+
+function naglowekEtapu(i, ulamek) {
+  return `<div class="etapy">${ETAPY.map((e, j) => `<span class="etap ${j === i ? 'teraz' : j < i ? 'zrobiony' : ''}">${j < i ? '✓ ' : ''}${e}</span>`).join('')}</div>
+          <div class="pasek"><div style="width:${Math.round(ulamek * 100)}%"></div></div>`;
+}
+
+function startLekcji(lekcja) {
+  L = lekcja;
+  stan = { slowoNr: 0, dobre: 0, wszystkie: 0, wyniki: {} };
+  pokazSlowo();
+}
+
+// --- 1. Słowa ---
+function pokazSlowo() {
+  const s = L.slowa[stan.slowoNr];
+  ekran.innerHTML = naglowekEtapu(0, (stan.slowoNr + 1) / L.slowa.length) + `
+    <div class="panel-nauki karta-slowa">
+      <div style="color:var(--przygaszony);font-size:13px">Słowo ${stan.slowoNr + 1} z ${L.slowa.length}</div>
+      <div class="obraz">${esc(s.obraz || '💬')}</div>
+      <div class="sl">${esc(s.sl)}</div>
+      <div class="pl">${esc(s.pl)}</div>
+      ${s.gwara ? `<div class="gwara">Wariant gwarowy: ${esc(s.gwara)}</div>` : ''}
+      ${przyciskGlosnika(s.nagranie)}
+    </div>
+    <div class="nawigacja">
+      <button class="przycisk drugi" id="wstecz" ${stan.slowoNr ? '' : 'style="visibility:hidden"'}>← Wstecz</button>
+      <button class="przycisk" id="dalej">${stan.slowoNr + 1 < L.slowa.length ? 'Dalej →' : 'Do dialogu →'}</button>
+    </div>`;
+  graj(s.nagranie);
+  document.getElementById('wstecz').onclick = () => { stan.slowoNr--; pokazSlowo(); };
+  document.getElementById('dalej').onclick = () => {
+    if (stan.slowoNr + 1 < L.slowa.length) { stan.slowoNr++; pokazSlowo(); } else pokazDialog();
+  };
+}
+
+// --- 2. Dialog ---
+function pokazDialog() {
+  const osoby = [...new Set(L.dialog.map(d => d.kto))];
+  ekran.innerHTML = naglowekEtapu(1, 1) + `
+    <div class="panel-nauki">
+      <div class="polecenie" style="margin-top:0">Kliknij kwestię, żeby zobaczyć tłumaczenie.</div>
+      ${L.dialog.map(d => `
+        <div class="dymek ${osoby.indexOf(d.kto) % 2 ? 'prawy' : ''}">
+          <div class="kto">${esc(d.kto)}</div>
+          <div>${esc(d.sl)} ${d.nagranie ? `<button class="klocek" data-audio="${esc(d.nagranie)}" style="padding:2px 8px">🔊</button>` : ''}</div>
+          <div class="tlum">${esc(d.pl)}</div>
+        </div>`).join('')}
+    </div>
+    <div class="nawigacja"><span></span><button class="przycisk" id="dalej">Do ćwiczeń →</button></div>`;
+  ekran.querySelectorAll('.dymek').forEach(d => d.addEventListener('click', e => { if (!e.target.closest('[data-audio]')) d.classList.toggle('otwarty'); }));
+  document.getElementById('dalej').onclick = () => startCwiczen(zbudujCwiczenia(L), 'lekcja');
+}
+
+// --- 3. Ćwiczenia ---
+function zbudujCwiczenia(lekcja) {
+  const s = tasuj(lekcja.slowa);
+  const kol = i => s[i % s.length];
+  const zadania = [];
+  for (let i = 0; i < 2; i++) zadania.push({ typ: 'fiszka', slowo: kol(i) });
+  for (let i = 2; i < 5; i++) zadania.push({ typ: 'wybor', slowo: kol(i) });
+  zadania.push({ typ: 'pary', slowa: tasuj(lekcja.slowa).slice(0, 4) });
+  // Lekcje z polem „pokoje” dostają 4 zadania: dopasuj przedmiot do pokoju
+  if (lekcja.pokoje && lekcja.pokoje.length) tasuj(lekcja.pokoje).slice(0, ILE_POKOI).forEach(p => zadania.push({ typ: 'pokoj', pokoj: p }));
+  for (let i = 5; i < 7; i++) zadania.push({ typ: 'sluchanie', slowo: kol(i) });
+  if (lekcja.zdania && lekcja.zdania.length) zadania.push({ typ: 'zdanie', zdanie: tasuj(lekcja.zdania)[0] });
+  return zadania.map(z => ({ ...z, lekcja }));
+}
+
+let kolejka, zadanieNr, tryb;
+function startCwiczen(zadania, t) { kolejka = zadania; zadanieNr = 0; tryb = t; pokazZadanie(); }
+
+function pokazZadanie() {
+  const z = kolejka[zadanieNr];
+  const gora = tryb === 'lekcja'
+    ? naglowekEtapu(2, zadanieNr / kolejka.length)
+    : `<div class="etapy"><span class="etap teraz">🔁 Powtórka</span></div><div class="pasek"><div style="width:${zadanieNr / kolejka.length * 100}%"></div></div>`;
+  ekran.innerHTML = gora + `<div class="panel-nauki" id="zadanie"></div>
+    <div class="nawigacja"><span style="color:var(--przygaszony);align-self:center">Zadanie ${zadanieNr + 1} z ${kolejka.length}</span>
+    <button class="przycisk ukryty" id="dalej">Dalej →</button></div>`;
+  const box = document.getElementById('zadanie');
+  ({ fiszka: zFiszka, wybor: zWybor, pary: zPary, sluchanie: zSluchanie, zdanie: zZdanie, pokoj: zPokoj })[z.typ](box, z);
+}
+
+// Zapisuje wynik zadania i pokazuje przycisk „Dalej”
+function wynikZadania(dobrze, slowaOcena, komunikat) {
+  stan.wszystkie++; if (dobrze) stan.dobre++;
+  slowaOcena.forEach(([lekcja, slowo, ok]) => {
+    const k = kluczSlowa(lekcja, slowo);
+    stan.wyniki[k] = (stan.wyniki[k] ?? true) && ok;
+  });
+  const info = document.getElementById('info');
+  if (info && komunikat) { info.textContent = komunikat; info.className = 'info ' + (dobrze ? 'ok' : 'blad'); }
+  const d = document.getElementById('dalej');
+  d.classList.remove('ukryty');
+  d.textContent = zadanieNr + 1 < kolejka.length ? 'Dalej →' : (tryb === 'lekcja' ? 'Do ciekawostki →' : 'Zakończ');
+  d.onclick = () => {
+    zadanieNr++;
+    if (zadanieNr < kolejka.length) pokazZadanie();
+    else if (tryb === 'lekcja') pokazCiekawostke(); else podsumowanie();
+  };
+}
+
+function opcjeZnaczen(slowo, pole) {
+  const pula = (pole === 'pl' ? wszystkieSlowa() : wszystkieSlowa()).filter(w => w[pole] !== slowo[pole]);
+  const zle = tasuj([...new Set(pula.map(w => w[pole]))]).slice(0, 3);
+  return tasuj([slowo[pole], ...zle]);
+}
+
+function rysujOpcje(box, opcje, poprawna, poWyborze) {
+  const kont = document.createElement('div'); kont.className = 'opcje';
+  opcje.forEach(t => {
+    const b = document.createElement('button'); b.className = 'opcja'; b.textContent = t;
+    b.onclick = () => {
+      kont.querySelectorAll('.opcja').forEach(x => { x.disabled = true; if (x.textContent === poprawna) x.classList.add('dobra'); });
+      if (t !== poprawna) b.classList.add('zla');
+      poWyborze(t === poprawna);
+    };
+    kont.appendChild(b);
+  });
+  box.appendChild(kont);
+  box.insertAdjacentHTML('beforeend', '<div class="info" id="info"></div>');
+}
+
+// Fiszka: odwróć i oceń sam siebie
+function zFiszka(box, z) {
+  const s = z.slowo;
+  box.innerHTML = `<div class="typ">Fiszka</div><div class="polecenie">Czy pamiętasz, co to znaczy?</div>
+    <div class="fiszka"><div class="obraz" style="font-size:44px">${esc(s.obraz || '💬')}</div><div class="sl">${esc(s.sl)}</div>
+    <div class="pl ukryty" id="tyl">${esc(s.pl)}</div></div>
+    <div class="nawigacja" id="fiszkaPrz"><span></span><button class="przycisk" id="odwroc">Odwróć kartę</button></div>
+    <div class="info" id="info"></div>`;
+  document.getElementById('odwroc').onclick = () => {
+    document.getElementById('tyl').classList.remove('ukryty');
+    document.getElementById('fiszkaPrz').innerHTML = `<button class="przycisk drugi" id="nie">✗ Jeszcze nie</button><button class="przycisk" id="tak">✓ Pamiętam</button>`;
+    const ocen = ok => { document.getElementById('fiszkaPrz').innerHTML = ''; wynikZadania(ok, [[z.lekcja, s, ok]], ok ? 'Super!' : 'Nic nie szkodzi, to słowo wróci w powtórkach.'); };
+    document.getElementById('tak').onclick = () => ocen(true);
+    document.getElementById('nie').onclick = () => ocen(false);
+  };
+}
+
+// Wybór znaczenia
+function zWybor(box, z) {
+  const s = z.slowo;
+  box.innerHTML = `<div class="typ">Wybierz znaczenie</div><div class="sl" style="text-align:left">${esc(s.sl)}</div><div class="polecenie">Co to znaczy po polsku?</div>`;
+  rysujOpcje(box, opcjeZnaczen(s, 'pl'), s.pl, ok => wynikZadania(ok, [[z.lekcja, s, ok]], ok ? 'Dobrze!' : `„${s.sl}” to „${s.pl}”.`));
+}
+
+// Słuchanie i wybór (bez nagrania: wybór zapisu do polskiego znaczenia)
+function zSluchanie(box, z) {
+  const s = z.slowo;
+  if (s.nagranie) {
+    box.innerHTML = `<div class="typ">Słuchanie</div><div class="polecenie">Posłuchaj i wybierz słowo, które słyszysz.</div>
+      <button class="przycisk drugi" data-audio="${esc(s.nagranie)}" style="margin-bottom:16px">🔊 Odtwórz jeszcze raz</button>`;
+    graj(s.nagranie);
+  } else {
+    box.innerHTML = `<div class="typ">Wybierz słowo</div><div class="polecenie">Jak powiesz po śląsku: <b>„${esc(s.pl)}”</b>?</div>`;
+  }
+  rysujOpcje(box, opcjeZnaczen(s, 'sl'), s.sl, ok => wynikZadania(ok, [[z.lekcja, s, ok]], ok ? 'Dobrze!' : `Poprawnie: „${s.sl}”.`));
+}
+
+// Dopasowanie par
+function zPary(box, z) {
+  const slowa = z.slowa;
+  let wybrany = null, trafione = 0, bledy = new Set();
+  box.innerHTML = `<div class="typ">Dopasuj pary</div><div class="polecenie">Połącz śląskie słowo z jego znaczeniem.</div>
+    <div class="pary"><div class="kol" id="lewa"></div><div class="kol" id="prawa"></div></div><div class="info" id="info"></div>`;
+  const lewa = document.getElementById('lewa'), prawa = document.getElementById('prawa');
+  tasuj(slowa).forEach(s => {
+    const b = document.createElement('button'); b.className = 'opcja'; b.textContent = s.sl; b.dataset.sl = s.sl;
+    b.onclick = () => { lewa.querySelectorAll('.opcja').forEach(x => x.classList.remove('wybrana')); b.classList.add('wybrana'); wybrany = s; };
+    lewa.appendChild(b);
+  });
+  tasuj(slowa).forEach(s => {
+    const b = document.createElement('button'); b.className = 'opcja'; b.textContent = s.pl;
+    b.onclick = () => {
+      if (!wybrany) return;
+      const l = lewa.querySelector(`[data-sl="${CSS.escape(wybrany.sl)}"]`);
+      if (wybrany === s) {
+        l.classList.remove('wybrana'); l.classList.add('dobra'); b.classList.add('dobra'); l.disabled = b.disabled = true;
+        trafione++; wybrany = null;
+        if (trafione === slowa.length) {
+          const ok = bledy.size === 0;
+          wynikZadania(ok, slowa.map(w => [z.lekcja, w, !bledy.has(w)]), ok ? 'Bezbłędnie!' : 'Udało się. Pomylone słowa wrócą w powtórkach.');
+        }
+      } else {
+        bledy.add(wybrany); b.classList.add('zla'); setTimeout(() => b.classList.remove('zla'), 500);
+      }
+    };
+    prawa.appendChild(b);
+  });
+}
+
+// Pokoje: opis pokoju z luką i 3 przedmioty do wyboru
+function zPokoj(box, z) {
+  const p = z.pokoj;
+  const slowo = (z.lekcja.slowa || []).find(w => w.sl === p.odpowiedz);
+  const [przed, po] = p.opis.split('___');
+  box.innerHTML = `<div class="typ">Co jest w pokoju?</div>
+    <div class="pokoj-glowa"><span class="obraz" style="font-size:42px">${esc(p.obraz || '🏠')}</span><b>${esc(p.pokoj)}</b></div>
+    <div class="polecenie opis-pokoju">${esc(przed)}<span class="luka" id="luka">?</span>${esc(po ?? '')}</div>
+    <div style="color:var(--przygaszony);margin-bottom:12px">Który przedmiot tu pasuje?</div>`;
+  rysujOpcje(box, tasuj([p.odpowiedz, ...p.zle]), p.odpowiedz, ok => {
+    const l = document.getElementById('luka'); l.textContent = p.odpowiedz; l.classList.add(ok ? 'dobra' : 'zla');
+    const tl = slowo ? ` (${slowo.pl})` : '';
+    wynikZadania(ok, slowo ? [[z.lekcja, slowo, ok]] : [], ok ? `Dobrze! „${p.odpowiedz}”${tl} pasuje do pokoju: ${p.pokoj}.` : `Tu pasuje „${p.odpowiedz}”${tl}.`);
+  });
+}
+
+// Układanie zdania z rozsypanych słów
+function zZdanie(box, z) {
+  const zd = z.zdanie, docelowe = zd.sl.split(/\s+/);
+  let ulozone = [];
+  box.innerHTML = `<div class="typ">Ułóż zdanie</div><div class="polecenie">Ułóż po śląsku: <b>„${esc(zd.pl)}”</b></div>
+    <div class="zdanie-odp" id="odp"></div><div class="klocki" id="klocki"></div>
+    <div class="nawigacja"><span></span><button class="przycisk" id="sprawdz">Sprawdź</button></div><div class="info" id="info"></div>`;
+  const odp = document.getElementById('odp'), klocki = document.getElementById('klocki');
+  let pula = tasuj(docelowe.map((t, i) => ({ t, i })));
+  function rysuj() {
+    odp.innerHTML = ''; klocki.innerHTML = '';
+    ulozone.forEach((k, idx) => { const b = document.createElement('button'); b.className = 'klocek'; b.textContent = k.t;
+      b.onclick = () => { ulozone.splice(idx, 1); pula.push(k); rysuj(); }; odp.appendChild(b); });
+    pula.forEach((k, idx) => { const b = document.createElement('button'); b.className = 'klocek'; b.textContent = k.t;
+      b.onclick = () => { pula.splice(idx, 1); ulozone.push(k); rysuj(); }; klocki.appendChild(b); });
+  }
+  rysuj();
+  document.getElementById('sprawdz').onclick = () => {
+    if (pula.length) { const i = document.getElementById('info'); i.textContent = 'Użyj wszystkich słów.'; i.className = 'info'; return; }
+    const ok = ulozone.map(k => k.t).join(' ') === zd.sl;
+    document.getElementById('sprawdz').remove();
+    odp.querySelectorAll('.klocek').forEach(b => { b.disabled = true; b.classList.add(ok ? 'dobra' : 'zla'); });
+    wynikZadania(ok, [], ok ? 'Brawo, zdanie jest dobrze!' : `Poprawnie: „${zd.sl}”`);
+  };
+}
+
+// --- 4. Ciekawostka ---
+function pokazCiekawostke() {
+  ekran.innerHTML = naglowekEtapu(3, 1) + `
+    <div class="panel-nauki"><div class="typ">💡 Ciekawostka</div><div class="ciekawostka">${esc(L.ciekawostka || '')}</div></div>
+    <div class="nawigacja"><span></span><button class="przycisk" id="dalej">Podsumowanie →</button></div>`;
+  document.getElementById('dalej').onclick = podsumowanie;
+}
+
+// --- 5. Podsumowanie (lekcji albo powtórki) ---
+function podsumowanie() {
+  const proc = stan.wszystkie ? Math.round(stan.dobre / stan.wszystkie * 100) : 100;
+  const zdobyte = stan.dobre * PUNKTY_ZA_ODPOWIEDZ;
+  postep.punkty += zdobyte;
+  // Wszystkie słowa lekcji trafiają do powtórek; pomylone wracają szybciej
+  if (tryb === 'lekcja') L.slowa.forEach(s => { const k = kluczSlowa(L, s); if (!(k in stan.wyniki)) stan.wyniki[k] = true; });
+  Object.entries(stan.wyniki).forEach(([k, ok]) => {
+    if (tryb === 'lekcja' && postep.slowa[k] && ok) return; // znane słowo: nie ruszamy terminu
+    ocenSlowo(k, ok);
+  });
+  if (tryb === 'lekcja') {
+    const stary = postep.ukonczone[L.nr];
+    postep.ukonczone[L.nr] = { najlepszy: Math.max(proc, stary ? stary.najlepszy : 0) };
+  }
+  zaliczDzienNauki();
+  zapisz();
+  const doPowt = Object.values(stan.wyniki).filter(v => !v).length;
+  ekran.innerHTML = (tryb === 'lekcja' ? naglowekEtapu(4, 1) : '') + `
+    <div class="panel-nauki srodek">
+      <h2>${proc === 100 ? 'Gryfnie! Bezbłędnie!' : proc >= 60 ? 'Dobro robota!' : 'Kożdy kiedyś zaczynoł!'}</h2>
+      <div class="duzy">${proc}%</div>
+      <p>${stan.dobre} z ${stan.wszystkie} dobrych odpowiedzi · <b style="color:var(--zolty)">+${zdobyte} pkt</b></p>
+      <p style="margin-top:10px">🔥 Seria: <b>${aktualnaSeria()}</b> ${aktualnaSeria() === 1 ? 'dzień' : 'dni'} nauki z rzędu</p>
+      <p style="color:var(--przygaszony);margin-top:10px;font-size:14px">
+        ${tryb === 'lekcja' ? `Słowa z tej lekcji (${L.slowa.length}) trafiły do powtórek.` : 'Powtórzone słowa wrócą za kilka dni.'}
+        ${doPowt ? ` ${doPowt} do poprawki wróci już jutro.` : ''}</p>
+      <div class="nawigacja" style="justify-content:center">
+        ${tryb === 'lekcja' ? '<button class="przycisk drugi" id="jeszcze">Powtórz lekcję</button>' : ''}
+        <button class="przycisk" id="menu">Lista lekcji</button>
+      </div>
+    </div>`;
+  document.getElementById('menu').onclick = menu;
+  const j = document.getElementById('jeszcze'); if (j) j.onclick = () => startLekcji(L);
+}
+
+// =====================================================================
+//  POWTÓRKI
+// =====================================================================
+function startPowtorki() {
+  const klucze = tasuj(doPowtorki()).slice(0, SLOW_W_POWTORCE);
+  stan = { dobre: 0, wszystkie: 0, wyniki: {} };
+  const zadania = klucze.map((k, i) => {
+    const { lekcja, slowo } = slowoPoKluczu(k);
+    return { typ: i % 2 ? 'sluchanie' : 'wybor', slowo, lekcja };
+  });
+  startCwiczen(zadania, 'powtorka');
+}
+
+menu();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Tu wrzucaj nagrania native speakera (najlepiej mp3), np.:
+  01-witej.mp3
+  01-dialog-1.mp3
+Potem w pliku lekcji wpisz ścieżkę, np.  nagranie: 'nagrania/01-witej.mp3'
