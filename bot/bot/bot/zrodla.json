@@ -1,0 +1,55 @@
+{
+  "_opis": "Ustawienia bota wydarzeń. Bot bierze wydarzenia TYLKO z oficjalnych stron instytucji wpisanych poniżej.",
+
+  "ileDniDoPrzodu": 45,
+  "maksWydarzen": 40,
+
+  "_jak_dodac_zrodlo": [
+    "nazwa      – nazwa instytucji, pokazywana przy wydarzeniu jako źródło",
+    "adres      – oficjalna strona z repertuarem albo kalendarz .ics",
+    "             {RRRR-MM} w adresie bot zamieni na bieżący i kolejne miesiące",
+    "miesiace   – ile miesięcy pobrać, gdy adres zawiera {RRRR-MM}",
+    "wzorLinku  – fragment adresu, który mają linki do pojedynczych wydarzeń",
+    "miejsce, miasto – gdzie odbywają się wydarzenia",
+    "wlaczony   – true = bot czyta to źródło, false = pomija"
+  ],
+
+  "zrodla": [
+    {
+      "nazwa": "Opera Śląska",
+      "adres": "https://opera-slaska.pl/repertuar/category/0/Wszystkie/month/{RRRR-MM}",
+      "miesiace": 2,
+      "wzorLinku": "/spektakle/event/",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "wlaczony": true
+    },
+    {
+      "nazwa": "Filharmonia Śląska",
+      "adres": "https://filharmonia-slaska.eu/repertuar/",
+      "wzorLinku": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "wlaczony": true,
+      "_uwaga": "Wzór linku do uzupełnienia po pierwszym uruchomieniu (patrz log bota)."
+    },
+    {
+      "nazwa": "Teatr Śląski",
+      "adres": "",
+      "wzorLinku": "",
+      "miejsce": "Teatr Śląski",
+      "miasto": "Katowice",
+      "wlaczony": false,
+      "_uwaga": "Wpisz adres strony z repertuarem i zmień wlaczony na true."
+    },
+    {
+      "nazwa": "Muzeum Śląskie",
+      "adres": "",
+      "wzorLinku": "",
+      "miejsce": "Muzeum Śląskie",
+      "miasto": "Katowice",
+      "wlaczony": false,
+      "_uwaga": "Wpisz adres strony z kalendarzem wydarzeń i zmień wlaczony na true."
+    }
+  ]
+}
