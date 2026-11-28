@@ -1,4 +1,338 @@
 {
-  "zaktualizowano": null,
-  "wydarzenia": []
+  "zaktualizowano": "2026-11-28T16:28:10.932Z",
+  "wydarzenia": [
+    {
+      "tytul": "Madama Butterfly",
+      "data": "2026-11-28",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/28/madama-butterfly",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "KONCERT ANDRZEJKOWY „Niech żyje bal” | Piosenki do słów Osieckiej | Chór-Mistrzowsko!",
+      "data": "2026-11-29",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-andrzejkowy-niech-zyje-bal-piosenki-do-slow-osieckiej-chor-mistrzowsko-2/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Górecki - Dvořák | Kwartet smyczkowy | Czernica",
+      "data": "2026-11-29",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/gorecki-dvorak-kwartet-smyczkowy-czernica/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Madama Butterfly",
+      "data": "2026-11-29",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/28/madama-butterfly",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Bolero „multimedialne” - Symfonia wody | Wesołowski | Orkiestra Kameralna",
+      "data": "2026-12-04",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/bolero-multimedialne-symfonia-wody-wesolowski-orkiestra-kameralna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-04",
+      "godzina": "10:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-04",
+      "godzina": "12:30",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-05",
+      "godzina": "17:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "MUZYKA FILMOWA NA ŚWIĘTA | PGE HoloGramy",
+      "data": "2026-12-06",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/muzyka-filmowa-na-swieta-hologramy/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Salon Poezji i Muzyki Anny Dymnej",
+      "data": "2026-12-06",
+      "godzina": "11:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/33/salon-poezji-i-muzyki-anny-dymnej",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-06",
+      "godzina": "11:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-06",
+      "godzina": "17:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "MŁODA FILHARMONIA | KOLĘDY ŚWIATA",
+      "data": "2026-12-07",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/mloda-filharmonia-koledy-swiata-4/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Ninanki | Zajęcia muzyczno-ruchowe dla najmłodszych",
+      "data": "2026-12-07",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/ninanki-zajecia-muzyczno-ruchowe-dla-najmlodszych/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-07",
+      "godzina": "10:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Magiczny świat Opery Śląskiej TANIEC",
+      "data": "2026-12-07",
+      "godzina": "12:30",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/208/magiczny-swiat-opery-slaskiej-taniec",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Laureat Konkursu Wieniawskiego | Luts | Foster | Orkiestra Symfoniczna",
+      "data": "2026-12-11",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/rossini-paganini-schumann-lutz-foster-orkiestra-symfoniczna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Cyganeria",
+      "data": "2026-12-12",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/16/cyganeria",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "AKADEMIA MUZYCZNEGO SMAKU | Marzenia zimowe",
+      "data": "2026-12-13",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/akademia-muzycznego-smaku-marzenia-zimowe/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Symfonia pamięci: Kilar – Mansell – Kazanecki – Morricone | Javůrek | Orkiestra Kameralna",
+      "data": "2026-12-13",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/symfonia-pamieci-kilar-clint-kazanecki-morricone-javurek-orkiestra-kameralna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Opera blisko Ciebie: Porozmawiajmy o Operze...",
+      "data": "2026-12-13",
+      "godzina": "16:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/39/opera-blisko-ciebie-porozmawiajmy-o-operze...",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Cyganeria",
+      "data": "2026-12-13",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/16/cyganeria",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Koncert kameralny | Jazz splata kolędy świata",
+      "data": "2026-12-16",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-kameralny-jazz-splata-koledy-swiata/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Oratorium na Boże Narodzenie | Shemet | Orkiestra Symfoniczna",
+      "data": "2026-12-18",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/oratorium-na-boze-narodzenie-shemet-orkiestra-symfoniczna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "OPOWIEŚĆ WIGILIJNA | Krzyżowski | Orkiestra Kameralna",
+      "data": "2026-12-19",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/opowiesc-wigilijna-krzyzowski-orkiestra-kameralna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "KONCERT KOLĘDOWY | Chór-Mistrzowsko!",
+      "data": "2026-12-20",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koledy-swiata-chor-mistrzowsko/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Cyrulik sewilski - wersja koncertowa",
+      "data": "2026-12-27",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/209/cyrulik-sewilski---wersja-koncertowa",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Koncert sylwestrowy | Strauss | Lehar | Rossini | Offenbach",
+      "data": "2026-12-28",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-sylwestrowy-strauss-lehar-rossini-offenbach/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Koncert sylwestrowy | Strauss | Lehar | Rossini | Offenbach",
+      "data": "2026-12-29",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-sylwestrowy-strauss-lehar-rossini-offenbach/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Koncert sylwestrowy | Strauss | Lehar | Rossini | Offenbach",
+      "data": "2026-12-30",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-sylwestrowy-strauss-lehar-rossini-offenbach/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Cyrulik sewilski - wersja koncertowa",
+      "data": "2026-12-31",
+      "godzina": "18:00",
+      "miejsce": "Opera Śląska",
+      "miasto": "Bytom",
+      "link": "https://opera-slaska.pl/spektakle/event/209/cyrulik-sewilski---wersja-koncertowa",
+      "zrodlo": "Opera Śląska"
+    },
+    {
+      "tytul": "Sylwester na Bis | Strauss | Lehar | Rossini | Offenbach",
+      "data": "2027-01-03",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/sylwester-na-bis-strauss-lehar-rossini-offenbach/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Koncert wiedeński \"Bal u Straussa\" | Kim | Orkiestra Kameralna",
+      "data": "2027-01-08",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-wiedenski-bal-u-straussa-kim-orkiestra-kameralna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Koncert wiedeński \"Bal u Straussa\" | Kim | Orkiestra Kameralna",
+      "data": "2027-01-09",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/koncert-wiedenski-bal-u-straussa-kim-orkiestra-kameralna/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "AKADEMIA MUZYCZNEGO SMAKU | Karnawałowa suita",
+      "data": "2027-01-10",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/akademia-muzycznego-smaku-karnawalowa-suita/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Muzyka prawosławna | Chór-Mistrzowsko!",
+      "data": "2027-01-10",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/muzyka-prawoslawna-chor-mistrzowsko/",
+      "zrodlo": "Filharmonia Śląska"
+    },
+    {
+      "tytul": "Ninanki | Zajęcia muzyczno-ruchowe dla najmłodszych",
+      "data": "2027-01-11",
+      "godzina": "",
+      "miejsce": "Filharmonia Śląska",
+      "miasto": "Katowice",
+      "link": "https://filharmonia-slaska.eu/production/ninanki-zajecia-muzyczno-ruchowe-dla-najmlodszych/",
+      "zrodlo": "Filharmonia Śląska"
+    }
+  ]
 }
