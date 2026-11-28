@@ -27,7 +27,7 @@
     {
       "nazwa": "Filharmonia Śląska",
       "adres": "https://filharmonia-slaska.eu/repertuar/",
-      "wzorLinku": "",
+      "wzorLinku": "/production/",
       "miejsce": "Filharmonia Śląska",
       "miasto": "Katowice",
       "wlaczony": true,
