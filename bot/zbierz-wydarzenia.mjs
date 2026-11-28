@@ -127,9 +127,24 @@ export function zRepertuaru(html, adres, zrodlo) {
   for (const { dt, l } of pary) {
     const tytul = tytulDla[l.href] || decodeURIComponent(l.href.split('/').filter(Boolean).pop() || '').replace(/[-_]/g, ' ');
     if (!tytul) continue;
+    const data = `${dt.r}-${dwa(dt.mies)}-${dwa(dt.d)}`;
+    let godzina = '';
     const godz = RE_GODZINA.exec(tekst.slice(dt.koniec, dt.koniec + 120));
+    if (godz) godzina = `${dwa(godz[1])}:${godz[2]}`;
+    else {
+      // Niektóre strony (np. Filharmonia Śląska) nie piszą godziny tekstem,
+      // ale mają ją w adresie przycisku „Kup bilet”: …-2026-11-29-17-00
+      const re = new RegExp(data + '[-T_ ]([01]\\d|2[0-3])[-:]([0-5]\\d)');
+      // szukamy tylko między tą datą a następną datą na stronie
+      const nastepna = Math.min(dt.koniec + 1500, ...daty.filter(d => d.start > dt.koniec).map(d => d.start));
+      for (const x of linki) {
+        if (x.start < dt.koniec || x.start >= nastepna) continue;
+        const m = re.exec(x.href);
+        if (m) { godzina = `${m[1]}:${m[2]}`; break; }
+      }
+    }
     wynik.push({
-      tytul: tytul.slice(0, 140), data: `${dt.r}-${dwa(dt.mies)}-${dwa(dt.d)}`, godzina: godz ? `${dwa(godz[1])}:${godz[2]}` : '',
+      tytul: tytul.slice(0, 140), data, godzina,
       miejsce: zrodlo.miejsce || '', miasto: zrodlo.miasto || '', link: l.href, zrodlo: zrodlo.nazwa,
     });
   }
